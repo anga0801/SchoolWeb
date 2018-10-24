@@ -1,0 +1,62 @@
+﻿@using SchoolWeb.Models
+@model SessionDetailsVM
+
+<br />
+<br />
+<h4><b>Session:</b></h4>
+
+@using (Html.BeginForm("SessionDetails", "Session", FormMethod.Post))
+{
+    @Html.HiddenFor(model => Model.Session.SessionID)
+
+    if (Session["RoleID"] != null && (int)Session["RoleID"] == (int)SchoolWeb.Models.Roles.Manager)
+    {
+        @Html.LabelFor(model => Model.Session.SubjectID)
+        @Html.DropDownListFor(model => Model.Session.SubjectID, new SelectList(Model.Subjects, "SubjectID", "Name"), new { })
+    }
+    else
+    {
+        <b>Subject: </b>@Model.Subject.Name
+        @Html.HiddenFor(model => Model.Session.SubjectID)
+    }
+    <br />
+    <b>Class: </b>@Model.ClassPO.Grade<text>(@Model.ClassPO.Group)</text>
+    @Html.HiddenFor(model => Model.Session.ClassID)
+    <br />
+    <b>Date: </b>@Model.Session.Date.ToShortDateString()
+    @Html.HiddenFor(model => Model.Session.Date)
+    <br />
+    <b>Start Time: </b>@Model.Session.StartTime
+    @Html.HiddenFor(model => Model.Session.StartTime)
+    <br />
+    <b>End Time: </b>@Model.Session.EndTime
+    @Html.HiddenFor(model => Model.Session.EndTime)
+    <br />
+
+    if (Session["RoleID"] != null && ((int)Session["RoleID"] == (int)SchoolWeb.Models.Roles.Teacher || (int)Session["RoleID"] == (int)SchoolWeb.Models.Roles.Manager))
+    {
+        @Html.LabelFor(model => Model.Session.Notes)
+        @Html.TextBoxFor(model => Model.Session.Notes, "", new { @class = "form-control" })
+
+        @Html.LabelFor(model => Model.Session.Homework)
+        @Html.TextBoxFor(model => Model.Session.Homework, "", new { @class = "form-control" })
+    }
+    else
+    {
+        <b>Notes: </b>@Model.Session.Notes
+        @Html.HiddenFor(model => Model.Session.Notes)
+        <br />
+        <b>Homework: </b>@Model.Session.Homework
+        @Html.HiddenFor(model => Model.Session.Homework)
+    }
+    <br />
+
+    if (Session["RoleID"] != null && ((int)Session["RoleID"] == (int)SchoolWeb.Models.Roles.Teacher || (int)Session["RoleID"] == (int)SchoolWeb.Models.Roles.Manager))
+    {
+        <input type="submit" value="Update" class="btn btn-primary glyphicon-apple" />
+    }
+    if (Session["RoleID"] != null && (int)Session["RoleID"] == (int)SchoolWeb.Models.Roles.Manager)
+    {
+        @Html.ActionLink("Delete", "DeleteUser", "User", new { sessionID = Model.Session.SessionID }, new { @class = "btn btn-danger" })
+    }
+}

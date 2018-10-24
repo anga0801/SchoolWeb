@@ -1,0 +1,35 @@
+﻿@using SchoolWeb.Models
+@model SessionDetailsVM
+
+<br />
+<br />
+<h4>New Session:</h4>
+
+@using (Html.BeginForm("CreateSession", "Session", FormMethod.Post))
+{
+    @Html.HiddenFor(model => Model.Session.SessionID)
+
+    @Html.LabelFor(model => Model.Session.ClassID)
+    <div class="form-group">
+        @Html.DropDownListFor(model => Model.Session.ClassID, new SelectList(Model.Classes, "ClassID", "Grade"), new { @class = "form-control" })
+
+    </div>
+
+    @Html.LabelFor(model => Model.Session.SubjectID)
+    <div class="form-group">
+        @Html.DropDownListFor(model => Model.Session.SubjectID, new SelectList(Model.Subjects, "SubjectID", "Name", "Subject"), "Select a Subject", new { @class = "form-control" })
+    </div>
+
+    @Html.LabelFor(model => Model.Session.Date)
+    @Html.TextBoxFor(model => Model.Session.Date, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
+
+    @Html.LabelFor(model => Model.Session.StartTime)
+    @Html.TextBoxFor(model => Model.Session.StartTime, new { type = "time", @class = "form-control" })
+
+
+
+    @Html.LabelFor(model => Model.Session.EndTime)
+    @Html.TextBoxFor(model => Model.Session.EndTime, new { type = "time", @class = "form-control" })
+    <br />
+    <input type="submit" value="Create" class="btn btn-success" />
+}

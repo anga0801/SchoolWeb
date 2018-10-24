@@ -1,0 +1,6 @@
+C:\Users\Anga\Desktop\Projects\SchoolWeb\Visual Studio\SchoolWeb\SchoolWeb-DAL\bin\Debug\SchoolWeb-DAL.dll
+C:\Users\Anga\Desktop\Projects\SchoolWeb\Visual Studio\SchoolWeb\SchoolWeb-DAL\bin\Debug\SchoolWeb-DAL.pdb
+C:\Users\Anga\Desktop\Projects\SchoolWeb\Visual Studio\SchoolWeb\SchoolWeb-DAL\obj\Debug\SchoolWeb-DAL.csprojAssemblyReference.cache
+C:\Users\Anga\Desktop\Projects\SchoolWeb\Visual Studio\SchoolWeb\SchoolWeb-DAL\obj\Debug\SchoolWeb-DAL.csproj.CoreCompileInputs.cache
+C:\Users\Anga\Desktop\Projects\SchoolWeb\Visual Studio\SchoolWeb\SchoolWeb-DAL\obj\Debug\SchoolWeb-DAL.dll
+C:\Users\Anga\Desktop\Projects\SchoolWeb\Visual Studio\SchoolWeb\SchoolWeb-DAL\obj\Debug\SchoolWeb-DAL.pdb

@@ -1,0 +1,131 @@
+﻿@using SchoolWeb.Models
+@model UserPO
+
+@{
+    /**/
+
+    /**/
+
+    ViewBag.Title = "UpdateUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<h2>Update User</h2>
+
+@using (Html.BeginForm("UpdateUser", "User", FormMethod.Post))
+{
+    @Html.HiddenFor(model => Model.UserID)
+
+    @Html.LabelFor(model => Model.FirstName)<text>(Required) <b>:</b></text>
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.FirstName, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.LabelFor(model => Model.LastName)<text>(Required) <b>:</b></text>
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.LastName, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.LabelFor(model => Model.Nickname)<b>:</b>
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.Nickname, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.Nickname, "", new { @class = "text-danger" })
+    </div>
+
+    if (Model != null && Model.RoleID != (int)SchoolWeb.Models.Roles.Student)
+    {
+        @Html.LabelFor(model => Model.Title)<text>(Required) <b>:</b></text>
+        <div class="form-group">
+            @Html.TextBoxFor(model => Model.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.Title, "", new { @class = "text-danger" })
+        </div>
+    }
+
+    @Html.LabelFor(model => Model.DateOfBirth)<text>(Required) <b>:</b></text>
+    <div class="form-group">
+        <input type="date" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" name="DateOfBirth" class="form-control" />
+        @Html.ValidationMessageFor(model => Model.DateOfBirth, "", new { @class = "text-danger" })
+    </div>
+
+    if (Model.RoleID == (int)SchoolWeb.Models.Roles.Teacher || Model.RoleID == (int)SchoolWeb.Models.Roles.Manager)
+    {
+        @Html.LabelFor(model => Model.HiredDate)<text>(Required) <b>:</b></text>
+        <div class="form-group">
+            <input type="date" value="@Model.HiredDate.Value.ToString("yyyy-MM-dd")" name="HiredDate" class="form-control" />
+            @Html.ValidationMessageFor(model => Model.HiredDate, "", new { @class = "text-danger" })
+        </div>
+    }
+
+    @Html.LabelFor(model => Model.Email)<b>:</b>
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.Email, "", new { @class = "text-danger" })
+    </div>
+
+
+    @Html.LabelFor(model => Model.Phone)<text>(Required) <b>:</b></text>
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.Phone, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.Phone, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.LabelFor(model => Model.HomeAddress)<b>:</b>
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.HomeAddress, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.HomeAddress, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.LabelFor(model => Model.PhotoPath)<b>:</b>
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.PhotoPath, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.PhotoPath, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.LabelFor(model => Model.About)<b>:</b>
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.About, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.About, "", new { @class = "text-danger" })
+    </div>
+
+    if (Session["Username"] != null && Session["Username"].ToString() == Model.Username)
+    {
+        @Html.LabelFor(model => Model.Username)<text>(Required) <b>:</b></text>
+        <div class="form-group">
+            @Html.TextBoxFor(model => Model.Username, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.Username, "", new { @class = "text-danger" })
+        </div>
+
+        @Html.LabelFor(model => Model.Password)<text>(Required) <b>:</b></text>
+        <div class="form-group">
+            @Html.TextBoxFor(model => Model.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.Password, "", new { @class = "text-danger" })
+        </div>
+    }
+
+    if (Model.RoleID == (int)SchoolWeb.Models.Roles.Parent)
+    {
+        @Html.LabelFor(model => Model.ChildID)<text>(Required) <b>:</b></text>
+        <div class="form-group">
+            @Html.TextBoxFor(model => Model.ChildID, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.ChildID, "", new { @class = "text-danger" })
+        </div>
+    }
+
+    @Html.HiddenFor(model => Model.RoleID)
+
+    if (Model.RoleID == (int)SchoolWeb.Models.Roles.Student)
+    {
+        @Html.LabelFor(model => Model.ClassID)<text>(Required) <b>:</b></text>
+        <div class="form-group">
+            @Html.TextBoxFor(model => Model.ClassID, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.ClassID, "", new { @class = "text-danger" })
+        </div>
+    }
+
+    <input type="submit" value="Update" class="btn btn-primary glyphicon-apple" />
+}
+

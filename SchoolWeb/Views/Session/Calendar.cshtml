@@ -1,0 +1,16 @@
+﻿@using SchoolWeb.Models
+@model SearchCriterion
+@{
+    ViewBag.Title = "Calendar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Calendar</h2>
+
+@using (Html.BeginForm("Calendar", "Session", FormMethod.Post))
+{
+    @Html.LabelFor(model => Model.SearchDate)
+    @Html.TextBoxFor(model => Model.SearchDate, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
+    
+    <input type="submit" value="Pick Date" class="btn btn-primary" />
+}

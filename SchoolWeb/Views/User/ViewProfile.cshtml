@@ -1,0 +1,52 @@
+﻿@using SchoolWeb.Models;
+@model UserPO
+@{
+    ViewBag.Title = "ViewProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <title>
+        @Model.FirstName @Model.LastName
+    </title>
+</head>
+<br />
+<br />
+<h2>@Model.FirstName @Model.LastName</h2>
+
+@if (Session["Username"] != null && Session["Username"].ToString() == Model.Username)
+{
+    <b>Username: </b>@Model.Username
+    <br />
+    <b>Password: </b>@Model.Password
+    <br />
+}
+<b>Nickname: </b>@Model.Nickname
+<br />
+@if (Model.RoleID != (int)SchoolWeb.Models.Roles.Student)
+{
+    <b>Title: </b>@Model.Title
+    <br />
+}
+<b>Date of Birth: </b>@Model.DateOfBirth.ToString("dd.MM.yyyy")
+<br />
+@if (Model.RoleID == (int)SchoolWeb.Models.Roles.Manager || Model.RoleID == (int)SchoolWeb.Models.Roles.Teacher)
+{
+    <b>Hired Date: </b>@Model.HiredDate.Value.ToString("dd.MM.yyyy")
+    <br />
+}
+<b>E-Mail: </b>@Model.Email
+<br />
+<b>Phone Number: </b>@Model.Phone
+<br />
+<b>About: </b>@Model.About
+<br />
+@if (Model.RoleID == (int)SchoolWeb.Models.Roles.Student)
+{
+    <b>Class: </b>@Html.ActionLink($"{ViewBag.ClassName}", "ViewClassDetails", "Class", new { classID = Model.ClassID}, new { })
+    <br />
+}
+@if (Session["Username"] != null && Session["Username"].ToString() == Model.Username)
+{
+    @Html.ActionLink("Update", "UpdateUser", "User", new { userID = Model.UserID }, new { @class = "btn btn-primary" })
+}

@@ -1,0 +1,27 @@
+﻿@using SchoolWeb.Models
+@model SubjectPO
+
+@{
+    ViewBag.Title = "ViewSubjectDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewSubjectDetails</h2>
+
+<b>Category: </b>
+<text>@Model.Category</text>
+<br />
+<b>Name: </b>
+<text>@Model.Name</text>
+<br />
+<b>Grade: </b>
+<text>@Model.Grade</text>
+<br />
+<b>Material: </b>
+<text>@Model.Material</text>
+<br />
+<b>Description: </b>
+<text>@Model.Description</text>
+<br />
+<b>Taught by: </b>
+<text>@Model.TeacherID</text>

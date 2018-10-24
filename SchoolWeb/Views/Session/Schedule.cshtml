@@ -1,0 +1,75 @@
+﻿@using SchoolWeb.Models
+@model ScheduleVM
+
+<br />
+<br />
+<br />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Periods\Classes</th>
+
+            @foreach (ClassPO classPO in Model.Classes)
+            {
+                <th>
+                    @classPO.Grade<text>(@classPO.Group)</text>
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            TimeSpan globalTS = new TimeSpan(7, 0, 0);
+
+            while (globalTS.Hours < 19)
+            {
+                TimeSpan classPeriodLocator = globalTS.Subtract(new TimeSpan(0, 15, 0));
+
+                <tr>
+                    <td>
+                        @globalTS.ToString("hh' : 'mm")
+                    </td>
+
+                    @foreach (ClassPO classPO in Model.Classes)
+                    {
+                        //Sessions for chosen class.
+                        IEnumerable<SessionPO> sessionsForSpecificClass = Model.Sessions.Where(sessionPO => sessionPO.ClassID == classPO.ClassID);
+
+                        //Sessions for chosen time.
+                        IEnumerable<SessionPO> sessionForSpecificTime = sessionsForSpecificClass.Where(sessionPO => sessionPO.StartTime <= globalTS && sessionPO.EndTime > globalTS);
+
+                        IEnumerable<SessionPO> sessionForPreviousTime = sessionsForSpecificClass.Where(sessionPO => sessionPO.StartTime <= classPeriodLocator && sessionPO.EndTime > classPeriodLocator);
+
+                        //foreach (SessionPO sessionPrevious in sessionForPreviousTime)
+                        //{
+                        //    if (sessionPrevious.SubjectID == )
+                        //}
+
+
+                        if (sessionForSpecificTime.Count() > 0)
+                        {
+                            foreach (SessionPO session in sessionForSpecificTime)
+                            {
+
+                                int spanNum = (int)Math.Ceiling((decimal)session.EndTime.Subtract(session.StartTime).Minutes / 15);
+                                <td rowspan="@spanNum">
+                                    @Html.ActionLink($"{session.SubjectID}", "SessionDetails", "Session", new { sessionID = session.SessionID }, new { })
+                                </td>
+                            }
+                        }
+                        else
+                        {
+                            <td>
+                                @Html.ActionLink("Add...", "CreateSession", "Session", new { startTime = globalTS, date = ViewBag.Date, classID = classPO.ClassID }, new { })
+                            </td>
+                        }
+                    }
+                </tr>
+
+                globalTS = globalTS.Add(new TimeSpan(0, 15, 0));
+            }
+        }
+    </tbody>
+</table>
+
+

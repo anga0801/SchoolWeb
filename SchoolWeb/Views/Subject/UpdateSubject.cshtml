@@ -1,0 +1,55 @@
+﻿@using SchoolWeb.Models
+@model SubjectPO
+
+@{
+    ViewBag.Title = "UpdateSubject";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<h2>UpdateSubject</h2>
+
+@using (Html.BeginForm("UpdateSbject", "Subject", FormMethod.Post))
+{
+    @Html.HiddenFor(model => Model.SubjectID)
+
+    @Html.LabelFor(model => Model.Category)<text>(Required) <b>:</b></text>
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.Category, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.Category, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.LabelFor(model => Model.Name)<text>(Required) <b>:</b></text>
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.Name, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.LabelFor(model => Model.Grade)<text>(Required) <b>:</b></text>
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.Grade, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.Grade, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.LabelFor(model => Model.Material)
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.Material, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.Material, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.LabelFor(model => Model.Description)
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.Description, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.LabelFor(model => Model.TeacherID)<text>(Required) <b>:</b></text>
+    <div class="form-group">
+        @Html.TextBoxFor(model => Model.TeacherID, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.TeacherID, "", new { @class = "text-danger" })
+    </div>
+
+    <input type="submit" value="Update" class="btn btn-primary" />
+}
+

@@ -1,0 +1,75 @@
+﻿@using SchoolWeb.Models
+@model List<SubjectPO>
+
+@{
+    ViewBag.Title = "ViewAllSubjects";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<h2>Subjects</h2>
+@if (Session["RoleID"] != null && ((int)Session["RoleID"] == (int)SchoolWeb.Models.Roles.Admin || (int)Session["RoleID"] == (int)SchoolWeb.Models.Roles.Manager))
+{
+    @Html.ActionLink("Create new Subject", "CreateSubject", "Subject", new { @class = "btn btn-primary" })
+}
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                Category
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Grade
+            </th>
+            <th>
+                Material
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Taught by
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (SubjectPO subject in Model)
+        {
+            <tr>
+                <td>
+                    @subject.Category
+                </td>
+                <td>
+                    @subject.Name
+                </td>
+                <td>
+                    @subject.Grade
+                </td>
+                <td>
+                    @subject.Material
+                </td>
+                <td>
+                    @subject.Description
+                </td>
+                <td>
+                    @subject.TeacherID
+                </td>
+                @if (Session["RoleID"] != null && ((int)Session["RoleID"] == (int)SchoolWeb.Models.Roles.Admin || (int)Session["RoleID"] == (int)SchoolWeb.Models.Roles.Manager))
+                {
+                    <td>
+                        @Html.ActionLink("Update", "UpdateSubject", "Subject", new { subjectID = subject.SubjectID }, new { @class = "btn btn-primary" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteSubject", "Subject", new { subjectID = subject.SubjectID }, new { @class = "btn btn-danger" })
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+    <tfoot></tfoot>
+</table>
+
